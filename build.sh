@@ -2,7 +2,7 @@
 
 ######################################
 ## Build script for libimobiledevice #
-##          by Marcelektro           #
+##          by @Marcelektro          #
 ######################################
 
 
@@ -72,19 +72,42 @@ build_and_install() {
     mkdir -p "$dir"
     cd "$dir"
 
-    echo "[i] Cloning $name from $repo_url to $dir"
-    git clone --depth 1 "$repo_url" .
+    # clone the repo if 'autogen.sh' (a part of the repo) does not exist
+    if [ ! -f "autogen.sh" ]; then
+        echo "[i] Cloning $name from $repo_url to $dir"
+        git clone --depth 1 "$repo_url" .
+    else
+        echo "[w] $name appears to be cloned already; if you want a clean clone, delete the directory at '$dir'"
+    fi
 
-    echo "[i] Configuring $name"
 
-    ./autogen.sh --prefix="$DIST_DIR"
+    # autogen if config.status (a file created by autogen) does not exist
+    if [ ! -f "config.status" ]; then
+        echo "[i] Configuring $name"
+        ./autogen.sh --prefix="$DIST_DIR"
+    else
+        echo "[w] $name appears to be configured already; if you want to reconfigure, delete the file at '$dir/config.status'"
+    fi
 
-    echo "[i] Building $name"
 
-    make -j"$(nproc)"
-    make install
+    # build and install if build-install-success.lock (a file created on success) does not exist
+    if [ ! -f "build-install-success.lock" ]; then
 
-    echo "[i] $name build and install complete"
+        echo "[i] Building and installing $name"
+
+        make -j"$(nproc)"
+        make install
+
+        touch "build-install-success.lock"
+
+        echo "[i] $name build and install complete"
+
+    else
+        echo "[w] $name appears to be built and installed already; if you want to rebuild and install, delete the file at '$dir/build-install-success.lock'"
+    fi
+
+
+    echo "[i] Setup of $name complete"
 }
 
 
@@ -96,4 +119,4 @@ build_and_install "libtatsu" "https://github.com/libimobiledevice/libtatsu"
 build_and_install "libimobiledevice" "https://github.com/libimobiledevice/libimobiledevice"
 
 
-echo "[i] Build complete"
+echo "[i] Build script completed"
