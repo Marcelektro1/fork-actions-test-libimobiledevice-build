@@ -7,6 +7,10 @@ jobs:
   build-windows:
     runs-on: windows-latest
 
+    defaults:
+      run:
+        shell: msys2 {0}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
