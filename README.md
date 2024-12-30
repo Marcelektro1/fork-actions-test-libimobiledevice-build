@@ -26,6 +26,8 @@ The script will clone the source repositories and build them.
 - autoconf
 - pkg-config
 - libssl-dev
+- libcurl4-openssl-dev
+- *(optional)* python3 with Cython 3.0.0 or newer
 
 
 ## Contact
