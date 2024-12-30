@@ -15,7 +15,7 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           update: true
-          install: gcc mingw-w64-make automake1.17 mingw-w64-libtool autoconf2.72 mingw-w64-pkg-config mingw-w64-openssl mingw-w64-curl mingw-w64-cython
+          install: gcc mingw-w64-x86_64-make mingw-w64-x86_64-autotools mingw-w64-x86_64-libtool mingw-w64-x86_64-pkg-config mingw-w64-x86_64-openssl mingw-w64-x86_64-curl mingw-w64-x86_64-python mingw-w64-x86_64-cython
 
       - name: Build project
         run: |
