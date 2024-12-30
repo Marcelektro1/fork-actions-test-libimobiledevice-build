@@ -12,10 +12,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Prepare environment
+        # cython installed via https://pypi.org/project/Cython/
         run: |
           sudo apt update 
           sudo apt install -y git gcc g++ make automake libtool autoconf pkg-config libssl-dev libcurl4-openssl-dev python3-dev
-          sudo pip install Cython --install-option="--no-cython-compile"
+          sudo python3 -m pip install cython==3.0.11
 
       - name: Build project
         run: |
