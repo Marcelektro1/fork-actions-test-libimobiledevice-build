@@ -16,7 +16,7 @@ jobs:
         with:
           msystem: 'MINGW64'
           update: true
-          install: gcc mingw-w64-x86_64-make mingw-w64-x86_64-autotools mingw-w64-x86_64-libtool mingw-w64-x86_64-pkg-config mingw-w64-x86_64-openssl mingw-w64-x86_64-curl mingw-w64-x86_64-python mingw-w64-x86_64-cython
+          install: mingw-w64-x86_64-toolchain mingw-w64-x86_64-autotools mingw-w64-x86_64-libtool mingw-w64-x86_64-openssl mingw-w64-x86_64-curl mingw-w64-x86_64-python mingw-w64-x86_64-cython
 
       - name: Build project
         run: |
