@@ -8,6 +8,8 @@ A script for building libimobiledevice-related repositories
 Build using `bash ./build.sh`  
 The script will clone the source repositories and build them.
 
+Repositories are cloned and checked out at specific commit hashes, which are defined in the script.
+
 
 ## Repositories
 - [libplist](https://github.com/libimobiledevice/libplist)
