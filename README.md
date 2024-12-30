@@ -18,7 +18,14 @@ The script will clone the source repositories and build them.
 
 
 ## Dependencies
-- (to be added)
+- git
+- gcc
+- make
+- automake
+- libtool
+- autoconf
+- pkg-config
+- libssl-dev
 
 
 ## Contact
