@@ -16,7 +16,7 @@ jobs:
         run: |
           sudo apt update 
           sudo apt install -y git gcc g++ make automake libtool autoconf pkg-config libssl-dev libcurl4-openssl-dev python3-dev
-          sudo python3 -m pip install Cython --config-settings="--no-cython-compile"
+          sudo python3 -m pip install cython==3.0.11
 
       - name: Build project
         run: |
