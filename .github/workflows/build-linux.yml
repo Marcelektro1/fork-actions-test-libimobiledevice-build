@@ -1,0 +1,28 @@
+name: Linux build
+
+on:
+  workflow_dispatch: # manually-triggered workflow
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Prepare environment
+        run: |
+          sudo apt update 
+          sudo apt install -y git gcc g++ make automake libtool autoconf pkg-config libssl-dev libcurl4-openssl-dev python3-dev
+          sudo pip install Cython --install-option="--no-cython-compile"
+
+      - name: Build project
+        run: |
+          bash ./build.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: libimobiledevice-dist-linux
+          path: ./dist/*
