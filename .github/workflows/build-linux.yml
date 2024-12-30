@@ -14,7 +14,7 @@ jobs:
       - name: Prepare environment
         run: |
           sudo apt update 
-          sudo apt install -y git gcc make automake libtool autoconf pkg-config libssl-dev libcurl4-openssl-dev python3-dev
+          sudo apt install -y git gcc g++ make automake libtool autoconf pkg-config libssl-dev libcurl4-openssl-dev python3-dev
           sudo pip install Cython --install-option="--no-cython-compile"
 
       - name: Build project
