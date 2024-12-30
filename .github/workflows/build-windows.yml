@@ -20,11 +20,27 @@ jobs:
         with:
           msystem: 'MINGW64'
           update: true
-          install: git mingw-w64-x86_64-toolchain mingw-w64-x86_64-autotools mingw-w64-x86_64-libtool mingw-w64-x86_64-openssl mingw-w64-x86_64-curl mingw-w64-x86_64-python mingw-w64-x86_64-cython
+          install: >-
+            git 
+            mingw-w64-x86_64-toolchain 
+            mingw-w64-x86_64-autotools 
+            mingw-w64-x86_64-libtool 
+            mingw-w64-x86_64-openssl 
+            mingw-w64-x86_64-curl 
+            mingw-w64-x86_64-python 
+            mingw-w64-x86_64-cython
 
       - name: Build project
         run: |
           bash ./build.sh
+
+      # TODO: Find a better way to solve this
+      - name: Copy additional files
+        run: |
+          cp /mingw64/bin/libtermcap-0.dll ./dist/bin/
+          cp /mingw64/bin/libreadline8.dll ./dist/bin/
+          cp /mingw64/bin/libcrypto-3-x64.dll ./dist/bin/
+          cp /mingw64/bin/libssl-3-x64.dll ./dist/bin/
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
