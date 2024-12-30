@@ -65,6 +65,7 @@ build_and_install() {
     # function parameters
     local name="$1"
     local repo_url="$2"
+    local commit_hash="$3"
 
     echo "[i] Setting up $name"
 
@@ -76,6 +77,14 @@ build_and_install() {
     if [ ! -f "autogen.sh" ]; then
         echo "[i] Cloning $name from $repo_url to $dir"
         git clone --depth 1 "$repo_url" .
+
+        # checkout commit if commit hash is provided
+        if [ -n "$commit_hash" ]; then
+            echo "[i] Checking out commit $commit_hash"
+            git fetch origin "$commit_hash"
+            git checkout "$commit_hash" > /dev/null
+        fi
+
     else
         echo "[w] $name appears to be cloned already; if you want a clean clone, delete the directory at '$dir'"
     fi
@@ -112,11 +121,11 @@ build_and_install() {
 
 
 # build libraries
-build_and_install "libplist" "https://github.com/libimobiledevice/libplist"
-build_and_install "libimobiledevice-glue" "https://github.com/libimobiledevice/libimobiledevice-glue"
-build_and_install "libusbmuxd" "https://github.com/libimobiledevice/libusbmuxd"
-build_and_install "libtatsu" "https://github.com/libimobiledevice/libtatsu"
-build_and_install "libimobiledevice" "https://github.com/libimobiledevice/libimobiledevice"
+build_and_install "libplist" "https://github.com/libimobiledevice/libplist" "44099d4b79c8d6a7d599d652ebef62db8dae6696"
+build_and_install "libimobiledevice-glue" "https://github.com/libimobiledevice/libimobiledevice-glue" "440dbbbf615de11acdd8216df0e3676e8efb9ba1"
+build_and_install "libusbmuxd" "https://github.com/libimobiledevice/libusbmuxd" "3fdaed78de8000af3b5d19d953eccd80a208ae2c"
+build_and_install "libtatsu" "https://github.com/libimobiledevice/libtatsu" "7e1647b9883ff1daa6363de20af2c4129ed45dcd"
+build_and_install "libimobiledevice" "https://github.com/libimobiledevice/libimobiledevice" "c8cdf20fe20b0c46ed7d9a9386bed03301ddbfa5"
 
 
 echo "[i] Build script completed"
