@@ -11,6 +11,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Test1
+        run: |
+          uname -a
+
       - name: Prepare environment
         uses: msys2/setup-msys2@v2
         with:
@@ -20,6 +24,7 @@ jobs:
 
       - name: Build project
         run: |
+          uname -a
           bash ./build.sh
 
       - name: Upload artifact
